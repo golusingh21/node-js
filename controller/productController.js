@@ -68,11 +68,22 @@ async function create(req, res){
                 message: 'Name already exist.'
             })
         }
+        let file = {
+            fileName: "",
+            filePath: "",
+        }
+        if(req?.file){
+            file = {
+                fileName: req.file.filename,
+                filePath: `/uploads/${req.file.filename}`,
+            }
+        }
         const data = await productModel.create({
             name, 
             status, 
             description, 
             categoryId,
+            ...file,
             createAt: new Date(),
             updateAt: null,
             deleteAt: null

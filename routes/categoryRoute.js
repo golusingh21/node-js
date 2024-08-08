@@ -3,9 +3,9 @@ const router = express.Router()
 const categoryController = require('../controller/categoryController');
 const {authMiddleware} = require('../middleware/authMiddleware')
 
-router.get('/', categoryController.getAll);
-router.get('/:id', categoryController.details);
-router.post('/', categoryController.create);
-router.put('/:id', categoryController.update);
+router.get('/', authMiddleware, categoryController.getAll);
+router.get('/:id', authMiddleware, categoryController.details);
+router.post('/', authMiddleware, categoryController.create);
+router.put('/:id', authMiddleware, categoryController.update);
 
 module.exports = router;

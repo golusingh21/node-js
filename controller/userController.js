@@ -15,7 +15,7 @@ async function loginUser(req, res){
         }
         const passwordMatch = await bcrypt.compare(password, hasUser.password)
         if(passwordMatch){
-            const token = jwt.sign({id: hasUser._id, email: hasUser.email}, process.env.JWT_SECRET_KEY, {expiresIn: '1h'})
+            const token = jwt.sign({id: hasUser._id, email: hasUser.email}, process.env.JWT_SECRET_KEY, {expiresIn: '2h'})
             return res.status(200).json({
                 message: 'success',
                 data: {
@@ -25,13 +25,13 @@ async function loginUser(req, res){
                 }
             })
         }else{
-            res.status(400).json({
+            return res.status(400).json({
                 message: 'Invalid credentials'
             })
         }
         
     }catch(err){
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal server error'
         })
     }
@@ -48,13 +48,13 @@ async function getAll(req, res){
         .limit(size)
         .exec()
         const totalRecords = await userModel.countDocuments();
-        res.status(200).json({
+        return res.status(200).json({
             message: 'success',
             data,
             totalRecords
         })
     }catch(err){
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal server error'
         })
     }
@@ -76,7 +76,7 @@ async function details(req, res){
         }
         
     }catch(err){
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal server error'
         })
     }
@@ -104,7 +104,7 @@ async function create(req, res){
             message: 'User created successfully'
         })
     }catch(err){
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal server error'
         })
     }
@@ -133,7 +133,7 @@ async function update(req, res){
             message: 'User updated successfully'
         })
     }catch(err){
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal server error'
         })
     }
@@ -145,7 +145,7 @@ async function destroy(req, res){
         const hasData = await userModel.findById(id)
         if(hasData){
             await userModel.findByIdAndDelete(id);
-            res.status(200).json({
+            return res.status(200).json({
                 message: 'User deleted successfully'
             })
         }
@@ -153,7 +153,7 @@ async function destroy(req, res){
             message: 'Data not found'
         })
     }catch(err){
-        res.status(500).json({
+        return res.status(500).json({
             error: 'Internal server error'
         })
     }

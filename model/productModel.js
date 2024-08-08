@@ -18,6 +18,8 @@ const productSchema = new Schema({
         type: String,
         required: true
     },
+    file: {type: String},
+    fileName: {type: String},
     createAt: {
         type: Date,
     },
