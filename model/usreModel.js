@@ -11,8 +11,10 @@ const userSchema = new Schema({
         required: true
     },
     password: {
-        type: String,
-        required: true
+        type: String
+    },
+    googleId: {
+        type: String
     }
 })
 const userModel = mongoose.model('user', userSchema)

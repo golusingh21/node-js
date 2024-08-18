@@ -6,10 +6,13 @@ const categoryRoute = require('./routes/categoryRoute');
 const productRoute = require('./routes/productRoute');
 const path = require('path');
 const { socketServer, io } = require('./config/socketConfig');
+const {swaggerUi, swaggerSpec} = require('./swagger')
+
 const app = express();
-const port = 3000;
+const port = 8000;
 dotenv.config()
 connectDb()
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec))
 app.use(express.json())
 app.use('/user', userRoute)
 app.use('/category', categoryRoute)

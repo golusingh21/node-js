@@ -3,6 +3,49 @@ const userValidation = require('../validation/userValidation')
 const Common = require("../helper/common")
 const jwt = require("jsonwebtoken")
 const bcrypt = require('bcrypt');
+const {OAuth2Client} = require('google-auth-library')
+
+const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+
+async function googleLogin(req, res){
+    const {idToken} = req.body;
+    if(!idToken){
+        res.status(400).json({
+            error: "Id token is required"
+        })
+    }
+    try{
+        const tokenVerification = await googleClient.verifyIdToken({
+            idToken,
+            audience: process.env.GOOGLE_CLIENT_ID
+        })
+        const payload = tokenVerification.getPayload();
+        let user = await userModel.findOne({googleId: payload.sub});
+        if(!user){
+            user = new userModel({
+                googleId: payload.sub,
+                name: payload.name,
+                email: payload.email
+            })
+           await user.save()
+        }
+        const token = jwt.sign({id: payload.sub, email: payload.email}, process.env.JWT_SECRET_KEY, {expiresIn: '2h'})
+        return res.status(200).json({
+            message: 'success',
+            data: {
+                token,
+                email: payload.email,
+                name: payload.name
+            }
+        })
+    }catch(error){
+        console.log('error-->', error)
+        return res.status(500).json({
+            error: 'Internal server error',
+            message: error
+        })
+    }
+}
 
 async function loginUser(req, res){
     const {email, password} = req.body;
@@ -160,6 +203,7 @@ async function destroy(req, res){
 }
 
 const userController = {
+    googleLogin,
     loginUser,
     getAll,
     details,
