@@ -1,0 +1,603 @@
+{
+	"info": {
+		"_postman_id": "a32e12cf-77db-4c06-9386-6df3ef014d7f",
+		"name": "node js",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37528295"
+	},
+	"item": [
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/category?pageNumber=1&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/category/66b313df1d0f347bac8f5058",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"66b313df1d0f347bac8f5058"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"category 1\",\r\n    \"status\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/category",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"category 1\",\r\n    \"status\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/category/66b3b389b455e30d4fe1fb6d",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"category",
+								"66b3b389b455e30d4fe1fb6d"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/user?pageNumber=1&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gulshan@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{liveUrl}}/user/login",
+							"host": [
+								"{{liveUrl}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gulshan\",\r\n    \"email\": \"gulshan@yuvasoftech.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{liveUrl}}/user",
+							"host": [
+								"{{liveUrl}}"
+							],
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Gulshan\",\r\n    \"email\": \"gulshan@yuvasoftech.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/66b3b5c9427a9049e14cf6ea",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"66b3b5c9427a9049e14cf6ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/66b3b5c9427a9049e14cf6ea",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"66b3b5c9427a9049e14cf6ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/66b3b5c9427a9049e14cf6ea",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"66b3b5c9427a9049e14cf6ea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "google-login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"idToken\": \"eyJhbGciOiJSUzI1NiIsImtpZCI6ImQyZDQ0NGNmOGM1ZTNhZTgzODZkNjZhMTNhMzE2OTc2YWEzNjk5OTEiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiI2MjAyMDE1NjkxMTAtOG9pbHYybzA0c2FtbTRhbjE3MmNubGNmdTZjNWRsYzUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiI2MjAyMDE1NjkxMTAtOG9pbHYybzA0c2FtbTRhbjE3MmNubGNmdTZjNWRsYzUuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDI2MDE0ODg3NjQ1NjU2MzAxNDYiLCJlbWFpbCI6Imd1bHNoYW4uczIxMDhAZ21haWwuY29tIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsIm5iZiI6MTcyMzczOTQxOCwibmFtZSI6Ikd1bHNoYW4gU2luZ2giLCJwaWN0dXJlIjoiaHR0cHM6Ly9saDMuZ29vZ2xldXNlcmNvbnRlbnQuY29tL2EvQUNnOG9jSzYtbTRMdlVnLVRIN09hcTEwQmI5WHRXQURWWnd3RnBWUmsyWDIycVBCenNmZVdRPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6Ikd1bHNoYW4iLCJmYW1pbHlfbmFtZSI6IlNpbmdoIiwiaWF0IjoxNzIzNzM5NzE4LCJleHAiOjE3MjM3NDMzMTgsImp0aSI6IjYyMTM0ZTViZjcwNThhYWE1MDdiYTA2NzkyNjg2ODM4M2VjOTJkMzIifQ.fKhlHuWlxVxfYhpJ3P__ZatZ8zlDp_rTuJwxvn7HE4OYFY_02rbACmvh1fEvPto3NoMiEzQm1S2aYoi-lckBRr3pctn5xKiXuRI6RIXlyvElkL5Xp0wwSmyBtKdBoHaZWKdQYpv4CB9BtIrqWWfaelUas9ge61A0Ly47Oec_UoGr2M4h3uAiPTBtSrOlBDRNQzxX-HrrlxwKYMTDqVGwz0_oiwLHfQ8y3wls74DRih6b6uE1iV8taPybRbzU7HziAmwwoMKQPYI5eHgtBv3SypzqzQMVKB1ChpoGjO2tQH0kmBq4hm41GBpsGhOIO4JHXXi4lC5jQtUe_JEH3IFEqw\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/google-login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"google-login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gulshan@yuvasoftech.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/forgot-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"forgot-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reset-password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"123456\",\r\n    \"token\": \"4510d2bd556afb34346ba18ca8e3ca19f32b33bc0e283e82640e86f611b12640\",\r\n    \"userId\": \"66bb8c9b0108d07967342d61\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/user/reset-password",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product?pageNumber=1&pageSize=10",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "1"
+								},
+								{
+									"key": "pageSize",
+									"value": "10"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/66b3b4fe3cd5db34cf90f78a",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"66b3b4fe3cd5db34cf90f78a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Product 4",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "false",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is my description",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "66b313df1d0f347bac8f5058",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/C:/Users/User/Downloads/pexels-photo-1266810.jpeg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/product",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "common",
+			"item": [
+				{
+					"name": "get-countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/common/countries",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"common",
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-state",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/common/states/101",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"common",
+								"states",
+								"101"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get-cities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/common/cities/4039",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"common",
+								"cities",
+								"4039"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjMyMTAyZmY1NWY0N2IzNmEzOTJiNCIsImVtYWlsIjoiZ3Vsc2hhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjMwNTI0MTIsImV4cCI6MTcyMzA1OTYxMn0.wi6b-V7s3d-CseAgFwY3ICC98AevMca_LWmEWfV0PJE",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMjYwMTQ4ODc2NDU2NTYzMDE0NiIsImVtYWlsIjoiZ3Vsc2hhbi5zMjEwOEBnbWFpbC5jb20iLCJpYXQiOjE3MjM3NDIyNjgsImV4cCI6MTcyMzc0OTQ2OH0.c2B3ZnAsLMVDQcd-RuuKrP-PZUVev6sbEDTSqSfdK1M\",\n",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "liveUrl",
+			"value": "https://node-js-wse4.onrender.com",
+			"type": "string"
+		}
+	]
+}

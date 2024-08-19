@@ -1,9 +1,13 @@
 const userModel = require('../model/usreModel');
+const tokenModel = require('../model/tokenModel')
 const userValidation = require('../validation/userValidation')
 const Common = require("../helper/common")
 const jwt = require("jsonwebtoken")
 const bcrypt = require('bcrypt');
-const {OAuth2Client} = require('google-auth-library')
+const crypto = require("crypto");
+const {OAuth2Client} = require('google-auth-library');
+const Joi = require('joi');
+const sendEmail = require('../helper/sendEmail');
 
 const googleClient = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
@@ -39,10 +43,8 @@ async function googleLogin(req, res){
             }
         })
     }catch(error){
-        console.log('error-->', error)
         return res.status(500).json({
-            error: 'Internal server error',
-            message: error
+            error: 'Internal server error'
         })
     }
 }
@@ -202,6 +204,91 @@ async function destroy(req, res){
     }
 }
 
+async function forgotPassword(req, res){
+    const body = req.body;
+    try{
+        const validationSchema = Joi.object({
+            email: Joi.string().email().required()
+        })
+        const {error} = validationSchema.validate(body);
+        if(error){
+            return res.status(400).json({
+                message:'Validation Error',
+                error: error.details[0].message
+            })
+        }
+        const hasUser = await userModel.findOne({email: body.email, googleId: {$exists: false}});
+        if(!hasUser){
+            return res.status(400).json({
+                message: 'User with given email does not exist'
+            })
+        }
+        let token = await tokenModel.findOne({userId: hasUser._id});
+        if(!token){
+            token = await new tokenModel({
+                userId: hasUser._id,
+                token: crypto.randomBytes(32).toString("hex")
+            }).save()
+        }
+        const link = `${process.env.RESET_PASSWORD_REDIRECTION_PATH}/auth/reset-password/${hasUser._id}/${token.token}`;
+        const sendEmailResult = await sendEmail(hasUser.email, "Password Reset", link);
+        if(sendEmailResult){
+            return res.status(200).json({
+                message: "Password reset link has been sent to your account"
+            })
+        }else{
+            return res.status(400).json({
+                message: "Internal server error"
+            })
+        }
+    }catch(error){
+        return res.status(500).json({
+            message: 'Internal server error'
+        })
+    }
+}
+
+async function resetPassword(req, res){
+    const {userId, token, password} = req.body;
+    try{
+        const validationSchema = Joi.object({password: Joi.string().required()});
+        const {error} = validationSchema.validate({password: password});
+        if(error){
+            return res.status(400).json({
+                message:'Validation Error',
+                error: error.details[0].message
+            })
+        }
+        const hasUser = await userModel.findById(userId);
+        if(!hasUser){
+            return res.status(400).json({
+                message: "Invalid link or expired"
+            })
+        }
+        const hasToken = await tokenModel.findOne({
+            userId: hasUser._id,
+            token: token
+        })
+        if(!hasToken){
+            return res.status(400).json({
+                message: "Invalid link or expired"
+            })
+        }
+        const encryptPassword = await Common.cryptoEncript(password)
+        hasUser.password = encryptPassword;
+        await hasUser.save();
+        await tokenModel.deleteOne();
+        return res.status(200).json({
+            message: "Password reset successfully."
+        })
+    }catch(error){
+        return res.status(500).json({
+            message: 'Internal server error',
+            error
+        })
+    }
+}
+
 const userController = {
     googleLogin,
     loginUser,
@@ -209,6 +296,8 @@ const userController = {
     details,
     create,
     update,
-    destroy
+    destroy,
+    forgotPassword,
+    resetPassword
 }
 module.exports = userController;

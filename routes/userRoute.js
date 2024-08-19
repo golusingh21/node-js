@@ -78,5 +78,7 @@ router.post('/', userController.create)
 router.delete('/:id', authMiddleware, userController.destroy)
 router.get('/:id', authMiddleware, userController.details)
 router.put('/:id', authMiddleware, userController.update)
+router.post('/forgot-password', userController.forgotPassword)
+router.post('/reset-password', userController.resetPassword)
 
 module.exports = router;
