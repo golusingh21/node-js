@@ -274,7 +274,7 @@ async function resetPassword(req, res){
                 message: "Invalid link or expired"
             })
         }
-        const encryptPassword = await Common.cryptoEncript(password)
+        const encryptPassword = await bcrypt.hash(password, 10)
         hasUser.password = encryptPassword;
         await hasUser.save();
         await tokenModel.deleteOne();
