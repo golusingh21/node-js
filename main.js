@@ -16,9 +16,8 @@ const app = new ApolloServer({
     const user = getUserFromToken(token);
     return {user}
   },
-  playground: {
-    endpoint: '/graphql'
-  }
+  introspection: true,
+  playground: true,
 })
 
 app.listen(port, () => {
