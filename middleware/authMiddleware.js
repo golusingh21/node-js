@@ -22,6 +22,17 @@ function authMiddleware(req, res, next) {
     }
 }
 
+function getUserFromToken(token){
+    if(!token) return null;
+    try{
+        const newAuthToken = token.split(' ')[1]
+        return jwt.verify(newAuthToken, process.env.JWT_SECRET_KEY)
+    }catch(error){
+        return null
+    }
+}
+
 module.exports = {
-    authMiddleware
+    authMiddleware,
+    getUserFromToken
 }
