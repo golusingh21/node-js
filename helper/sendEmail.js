@@ -1,7 +1,16 @@
 const nodeMailer = require('nodemailer');
+const forgotPasswordTemplate = require('../mailTemplate/forgotPassword');
+const Common = require('./common');
 
-async function sendEmail(email, subject, body){
+async function _renderTemplate(user, type, link){
+    switch(type){
+        case Common.TEMPLATE.RESET_PASSWORD: return await forgotPasswordTemplate(user, link)
+    }
+}
+
+async function sendEmail(user, type, link){
     try{
+        const html = await _renderTemplate(user, type, link)
         const transport = nodeMailer.createTransport({
             host: 'smtp.email',
             service: 'gmail',
@@ -14,9 +23,9 @@ async function sendEmail(email, subject, body){
         })
         transport.sendMail({
             from: process.env.USER_EMAIL,
-            to: email,
-            subject: subject,
-            text: body
+            to: user.email,
+            subject: type,
+            html: html
         })
         return true
     }catch(error){

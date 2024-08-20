@@ -6,6 +6,10 @@ const INTERNAL_SERVER_ERROR = "Internal server error";
 const DATA_NOT_FOUND = "Data not found";
 const VALIDATION_ERROR = "Validation error";
 
+const TEMPLATE = {
+    RESET_PASSWORD: "Reset Password"
+}
+
 function cryptoEncript(val){
     return CryptoJS.AES.encrypt(val, process.env.CRYPTO_SECRET_KEY).toString();
 }
@@ -15,6 +19,7 @@ function cryptoDecrypt(val){
 }
 
 const Common = {
+    TEMPLATE,
     pageNumber,
     pageSize,
     cryptoEncript,

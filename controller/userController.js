@@ -58,6 +58,11 @@ async function loginUser(req, res){
                 message: 'Invalid credentials'
             })
         }
+        if(hasUser.isEmailVerified!==true){
+            return res.status(400).json({
+                message: "Email is not verified"
+            })
+        }
         const passwordMatch = await bcrypt.compare(password, hasUser.password)
         if(passwordMatch){
             const token = jwt.sign({id: hasUser._id, email: hasUser.email}, process.env.JWT_SECRET_KEY, {expiresIn: '2h'})
@@ -129,7 +134,7 @@ async function details(req, res){
 
 async function create(req, res){
     const {body} = req;
-    const {password} = body
+    const {name, email, password} = body
     const encryptPassword = await bcrypt.hash(password, 10)
     const {error} = await userValidation.validate(body);
     if(error) res.status(400).json({
@@ -143,9 +148,19 @@ async function create(req, res){
                 message: `User already exist with ${body.email}`
             })
         }
-        const data = await userModel.create({...body, password: encryptPassword});
+        const data = await userModel.create({
+            name: name,
+            email: email, 
+            password: encryptPassword, 
+            emailVerificationToken: crypto.randomBytes(32).toString("hex")
+        });
         return res.status(200).json({
-            data: data,
+            data: {
+                id: data._id,
+                name: data.name,
+                email: data.email,
+                emailVerificationToken: data.emailVerificationToken
+            },
             message: 'User created successfully'
         })
     }catch(err){
@@ -231,7 +246,7 @@ async function forgotPassword(req, res){
             }).save()
         }
         const link = `${process.env.RESET_PASSWORD_REDIRECTION_PATH}/auth/reset-password/${hasUser._id}/${token.token}`;
-        const sendEmailResult = await sendEmail(hasUser.email, "Password Reset", link);
+        const sendEmailResult = await sendEmail(hasUser, Common.TEMPLATE.RESET_PASSWORD, link);
         if(sendEmailResult){
             return res.status(200).json({
                 message: "Password reset link has been sent to your account"
@@ -289,6 +304,17 @@ async function resetPassword(req, res){
     }
 }
 
+async function emailVerification(){
+    try{
+        
+    }catch(error){
+        return res.status(500).json({
+            message: 'Internal server error',
+            error
+        })
+    }
+}
+
 const userController = {
     googleLogin,
     loginUser,
@@ -298,6 +324,7 @@ const userController = {
     update,
     destroy,
     forgotPassword,
-    resetPassword
+    resetPassword,
+    emailVerification
 }
 module.exports = userController;
