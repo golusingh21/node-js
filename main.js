@@ -5,6 +5,7 @@ const userRoute = require('./routes/userRoute');
 const categoryRoute = require('./routes/categoryRoute');
 const productRoute = require('./routes/productRoute');
 const systemRoute = require('./routes/systemRoute');
+const orderRoute = require('./routes/orderRoute')
 const path = require('path');
 const { socketServer, io } = require('./config/socketConfig');
 const {swaggerUi, swaggerSpec} = require('./swagger');
@@ -19,6 +20,7 @@ app.use('/user', userRoute)
 app.use('/category', categoryRoute)
 app.use('/product', productRoute)
 app.use('/common', systemRoute)
+app.use('/order', orderRoute)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 
 socketServer()

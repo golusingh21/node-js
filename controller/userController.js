@@ -65,7 +65,7 @@ async function loginUser(req, res){
         }
         const passwordMatch = await bcrypt.compare(password, hasUser.password)
         if(passwordMatch){
-            const token = jwt.sign({id: hasUser._id, email: hasUser.email}, process.env.JWT_SECRET_KEY, {expiresIn: '2h'})
+            const token = jwt.sign({id: hasUser._id, email: hasUser.email}, process.env.JWT_SECRET_KEY, {expiresIn: '300h'})
             return res.status(200).json({
                 message: 'success',
                 data: {
@@ -92,15 +92,24 @@ async function getAll(req, res){
         const {pageNumber = Common.pageNumber, pageSize = Common.pageSize} = req.query;
         const page = parseInt(pageNumber);
         const size = parseInt(pageSize);
+        let list = []
         const data = await userModel
         .find()
         .skip((page - 1) * size)
         .limit(size)
         .exec()
+        data.forEach((user)=>{
+            list.push({
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                isEmailVerified: user.isEmailVerified
+            })
+        })
         const totalRecords = await userModel.countDocuments();
         return res.status(200).json({
             message: 'success',
-            data,
+            data: list,
             totalRecords
         })
     }catch(err){
@@ -113,15 +122,20 @@ async function getAll(req, res){
 async function details(req, res){
     const {id} = req.params
     try{
-        const data = await userModel.findOne(id)
-        if(data){
+        const user = await userModel.findById(id)
+        if(user){
             return res.status(200).json({
                 message: 'success',
-                data
+                user: {
+                    id: user._id,
+                    name: user.name,
+                    email: user.email,
+                    isEmailVerified: user.isEmailVerified
+                }
             })
         }else{
             return res.status(200).json({
-                message: 'Data not found'
+                message: 'user not found'
             })
         }
         
@@ -152,14 +166,17 @@ async function create(req, res){
             name: name,
             email: email, 
             password: encryptPassword, 
-            emailVerificationToken: crypto.randomBytes(32).toString("hex")
         });
+        const tokenData = await new tokenModel({
+            userId: data._id,
+            token: crypto.randomBytes(32).toString("hex")
+        }).save()
         return res.status(200).json({
             data: {
                 id: data._id,
                 name: data.name,
                 email: data.email,
-                emailVerificationToken: data.emailVerificationToken
+                emailVerificationTOken: tokenData.token
             },
             message: 'User created successfully'
         })
@@ -238,6 +255,11 @@ async function forgotPassword(req, res){
                 message: 'User with given email does not exist'
             })
         }
+        if(!hasUser.isEmailVerified){
+            return res.status(400).json({
+                message: 'Email is not verified'
+            })
+        }
         let token = await tokenModel.findOne({userId: hasUser._id});
         if(!token){
             token = await new tokenModel({
@@ -304,9 +326,27 @@ async function resetPassword(req, res){
     }
 }
 
-async function emailVerification(){
+async function emailVerification(req, res){
+    const {token, userId} = req.query
     try{
-        
+        const user = await userModel.findOne({_id: userId, isEmailVerified: false})
+        if(!user){
+            return res.status(400).json({
+                message: "Invalid link or expired"
+            })
+        }
+        const hasToken = tokenModel.findOne({userId: userId, token: token})
+        if(!hasToken){
+            return res.status(400).json({
+                message: "Invalid ilnk or expired"
+            })
+        }
+        user.isEmailVerified = true;
+        await user.save();
+        await tokenModel.deleteOne();
+        return res.status(200).json({
+            message: "Email verified successfully"
+        })
     }catch(error){
         return res.status(500).json({
             message: 'Internal server error',

@@ -11,7 +11,7 @@ function authMiddleware(req, res, next) {
     }
     
     try {
-        const newAuthToken = authorization.split(' ')[1]
+        const newAuthToken = authorization.replace("Bearer ", "")
         const decodeAuthorization = jwt.verify(newAuthToken, process.env.JWT_SECRET_KEY);
         req.user = decodeAuthorization;
         return next(); // Call next middleware or route handler

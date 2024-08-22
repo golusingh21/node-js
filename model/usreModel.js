@@ -19,11 +19,6 @@ const userSchema = new Schema({
     isEmailVerified: {
         type: Boolean,
         default: false,
-    },
-    emailVerificationToken: {
-        type: String,
-        default: Date.now,
-        expires: 3600
     }
 })
 const userModel = mongoose.model('user', userSchema)
