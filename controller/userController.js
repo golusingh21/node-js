@@ -103,7 +103,9 @@ async function getAll(req, res){
                 id: user._id,
                 name: user.name,
                 email: user.email,
-                isEmailVerified: user.isEmailVerified
+                isEmailVerified: user.isEmailVerified,
+                createAt: user.createAt,
+                updateAt: user.updateAt
             })
         })
         const totalRecords = await userModel.countDocuments();
@@ -130,7 +132,9 @@ async function details(req, res){
                     id: user._id,
                     name: user.name,
                     email: user.email,
-                    isEmailVerified: user.isEmailVerified
+                    isEmailVerified: user.isEmailVerified,
+                    createAt: user.createAt,
+                    updateAt: user.updateAt
                 }
             })
         }else{
