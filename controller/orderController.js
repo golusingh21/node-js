@@ -9,7 +9,7 @@ async function productPayment(req, res){
         const payment = await stripe.paymentIntents.create({
             amount,
             currency: "usd",
-            source: token,
+            source: 12 || token,
         })
         console.log(44, payment);
         return res.status(200).json({

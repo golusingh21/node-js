@@ -29,7 +29,7 @@ io.on("connection", (socket) => {
   io.emit('!!Socket connected successfully!!')
 
   socket.on("message", (data) => {
-    io.emit('message', data)
+    io.emit('message', 'Hi Gulshan')
   });
 
   // Handle disconnection

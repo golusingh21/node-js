@@ -19,6 +19,17 @@ const userSchema = new Schema({
     isEmailVerified: {
         type: Boolean,
         default: false,
+    },
+    createAt: {
+        type: Date,
+        default: Date.now
+    },
+    deleteAt: {
+        type: Date
+    },
+    updateAt: {
+        type: Date,
+        default: Date.now
     }
 })
 const userModel = mongoose.model('user', userSchema)
