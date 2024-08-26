@@ -27,9 +27,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/category?pageNumber=1&pageSize=10",
+							"raw": "{{liveUrl}}/category?pageNumber=1&pageSize=10",
 							"host": [
-								"{{baseUrl}}"
+								"{{liveUrl}}"
 							],
 							"path": [
 								"category"
@@ -159,9 +159,9 @@
 							}
 						],
 						"url": {
-							"raw": "{{baseUrl}}/user?pageNumber=1&pageSize=10",
+							"raw": "{{liveUrl}}/user?pageNumber=1&pageSize=10",
 							"host": [
-								"{{baseUrl}}"
+								"{{liveUrl}}"
 							],
 							"path": [
 								"user"
@@ -194,7 +194,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"gulshan@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"email\": \"gulshan@yuvasoftech.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -202,9 +202,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{liveUrl}}/user/login",
+							"raw": "{{baseUrl}}/user/login",
 							"host": [
-								"{{liveUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
@@ -221,7 +221,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Gulshan\",\r\n    \"email\": \"gulshan@yuvasoftech.com\",\r\n    \"password\": \"123456\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Gulshan\",\r\n    \"email\": \"gulshan1@gmail.com\",\r\n    \"password\": \"123456\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -229,9 +229,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{liveUrl}}/user",
+							"raw": "{{baseUrl}}/user",
 							"host": [
-								"{{liveUrl}}"
+								"{{baseUrl}}"
 							],
 							"path": [
 								"user"
@@ -273,13 +273,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/user/66b3b5c9427a9049e14cf6ea",
+							"raw": "{{baseUrl}}/user/66bb8c9b0108d07967342d61",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"user",
-								"66b3b5c9427a9049e14cf6ea"
+								"66bb8c9b0108d07967342d61"
 							]
 						}
 					},
@@ -345,9 +345,9 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/user/forgot-password",
+							"raw": "{{liveUrl}}/user/forgot-password",
 							"host": [
-								"{{baseUrl}}"
+								"{{liveUrl}}"
 							],
 							"path": [
 								"user",
@@ -364,7 +364,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"password\": \"123456\",\r\n    \"token\": \"4510d2bd556afb34346ba18ca8e3ca19f32b33bc0e283e82640e86f611b12640\",\r\n    \"userId\": \"66bb8c9b0108d07967342d61\"\r\n}",
+							"raw": "{\r\n    \"password\": \"123456\",\r\n    \"token\": \"7fe23e3fc95abeb028cafefe663cde96526de2a7574fa93ba5a35634fe81af7f\",\r\n    \"userId\": \"66bb8c9b0108d07967342d61\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -383,6 +383,35 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "email-verification",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/user/email/verification?token=39dfceed35b59fda193a7d465a7f907aabb0478b3d258a27ba2fba43f87560e&userId=66c4b21665c55df93e727173",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"user",
+								"email",
+								"verification"
+							],
+							"query": [
+								{
+									"key": "token",
+									"value": "39dfceed35b59fda193a7d465a7f907aabb0478b3d258a27ba2fba43f87560e"
+								},
+								{
+									"key": "userId",
+									"value": "66c4b21665c55df93e727173"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -395,9 +424,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/product?pageNumber=1&pageSize=10",
+							"raw": "{{liveUrl}}/product?pageNumber=1&pageSize=10",
 							"host": [
-								"{{baseUrl}}"
+								"{{liveUrl}}"
 							],
 							"path": [
 								"product"
@@ -422,13 +451,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/product/66b3b4fe3cd5db34cf90f78a",
+							"raw": "{{baseUrl}}/product/66c4bb7ff4a9709a29fd5a3a",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
 								"product",
-								"66b3b4fe3cd5db34cf90f78a"
+								"66c4bb7ff4a9709a29fd5a3a"
 							]
 						}
 					},
@@ -450,7 +479,7 @@
 							"formdata": [
 								{
 									"key": "name",
-									"value": "Product 4",
+									"value": "Product 1",
 									"type": "text"
 								},
 								{
@@ -465,13 +494,13 @@
 								},
 								{
 									"key": "categoryId",
-									"value": "66b313df1d0f347bac8f5058",
+									"value": "66c4b87fd1bc3dbd24d4b5b6",
 									"type": "text"
 								},
 								{
 									"key": "image",
 									"type": "file",
-									"src": "/C:/Users/User/Downloads/pexels-photo-1266810.jpeg"
+									"src": "/C:/Users/User/Downloads/codewars.png"
 								}
 							]
 						},
@@ -482,6 +511,99 @@
 							],
 							"path": [
 								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "status",
+									"value": "true",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Product 14",
+									"type": "text"
+								},
+								{
+									"key": "categoryId",
+									"value": "66c4b87fd1bc3dbd24d4b5b6",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is my description",
+									"type": "text"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": [],
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/product/66c4bb7ff4a9709a29fd5a3a",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"66c4bb7ff4a9709a29fd5a3a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "destory",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/product/66c4bb7ff4a9709a29fd5a3a",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"product",
+								"66c4bb7ff4a9709a29fd5a3a"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"amount\": \"500\",\r\n    \"token\": \"fs\",\r\n    \"productId\": \"66c4bb7ff4a9709a29fd5a3a\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/order",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"order"
 							]
 						}
 					},
@@ -535,9 +657,9 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{baseUrl}}/common/cities/4039",
+							"raw": "{{liveUrl}}/common/cities/4039",
 							"host": [
-								"{{baseUrl}}"
+								"{{liveUrl}}"
 							],
 							"path": [
 								"common",
@@ -556,7 +678,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YjMyMTAyZmY1NWY0N2IzNmEzOTJiNCIsImVtYWlsIjoiZ3Vsc2hhbkBnbWFpbC5jb20iLCJpYXQiOjE3MjMwNTI0MTIsImV4cCI6MTcyMzA1OTYxMn0.wi6b-V7s3d-CseAgFwY3ICC98AevMca_LWmEWfV0PJE",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YmI4YzliMDEwOGQwNzk2NzM0MmQ2MSIsImVtYWlsIjoiZ3Vsc2hhbkB5dXZhc29mdGVjaC5jb20iLCJpYXQiOjE3MjQxNjg5NzUsImV4cCI6MTcyNTI0ODk3NX0.WM4Y_6P4i_cHWw4a2XHTuTf6EPO4cMyctUUSWD-36gI",
 				"type": "string"
 			}
 		]
@@ -586,8 +708,9 @@
 	"variable": [
 		{
 			"key": "token",
-			"value": "        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEwMjYwMTQ4ODc2NDU2NTYzMDE0NiIsImVtYWlsIjoiZ3Vsc2hhbi5zMjEwOEBnbWFpbC5jb20iLCJpYXQiOjE3MjM3NDIyNjgsImV4cCI6MTcyMzc0OTQ2OH0.c2B3ZnAsLMVDQcd-RuuKrP-PZUVev6sbEDTSqSfdK1M\",\n",
-			"type": "string"
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YmI4YzliMDEwOGQwNzk2NzM0MmQ2MSIsImVtYWlsIjoiZ3Vsc2hhbkB5dXZhc29mdGVjaC5jb20iLCJpYXQiOjE3MjQxNjc1MTEsImV4cCI6MTcyNTI0NzUxMX0.Gkq53Lihcd5mhwX6wEObySWRvfi9thIETbQtRCCDDVg",
+			"type": "string",
+			"disabled": true
 		},
 		{
 			"key": "baseUrl",
