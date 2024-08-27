@@ -1,5 +1,6 @@
 const connectDb = require('./config/connection')
 const dotenv = require('dotenv');
+const cors = require('cors')
 const express = require('express');
 const userRoute = require('./routes/userRoute');
 const categoryRoute = require('./routes/categoryRoute');
@@ -11,6 +12,8 @@ const { socketServer, io } = require('./config/socketConfig');
 const {swaggerUi, swaggerSpec} = require('./swagger');
 
 const app = express();
+app.use(cors())
+app.options('*', cors())
 const port = 8000;
 dotenv.config()
 connectDb()
